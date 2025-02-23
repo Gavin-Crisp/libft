@@ -22,7 +22,7 @@ void	*ft_malloc(size_t size)
 	heap = get_heap();
 	best_chunk = ft_dllstfind_closest(heap->meta, &size, size_diff);
 	((t_chunk *)(best_chunk->data))->is_free = 0;
-	ft_dllstadd_front(&best_chunk->next, ft_lstnew(new_heap_chuck(
+	ft_dllstadd_front(&best_chunk->next, ft_lstnew(new_heap_chunk(
 		(size_t)((t_chunk *)(best_chunk->data))->start + size,
 		((t_chunk *)(best_chunk->data))->size - size,
 		1)));

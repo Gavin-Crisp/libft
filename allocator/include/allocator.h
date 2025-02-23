@@ -15,8 +15,7 @@ typedef struct s_chunk
 	int			is_free;
 }	t_chunk;
 
-t_heap			*get_heap(void);
-
-t_chunk	*new_heap_chuck(void *start, size_t size, int is_free);
+t_heap		*get_heap(void);
+t_chunk		*new_heap_chunk(void *start, size_t size, int is_free);
 
 #endif

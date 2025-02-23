@@ -1,6 +1,6 @@
 #include "allocator.h"
 
-t_chunk	*new_heap_chuck(void *start, size_t size, int is_free)
+t_chunk	*new_heap_chunk(void *start, size_t size, int is_free)
 {
 	t_chunk	*out;
 
