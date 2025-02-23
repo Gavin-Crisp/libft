@@ -1,6 +1,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
+# include <unistd.h>
+# define GNL_BUFFER_SIZE 50
+
 
 // binary_tree
 typedef struct s_btree
@@ -72,6 +75,9 @@ int			ft_dllstis_sorted(t_dllist *head, int (*cmp)(void *, void *));
 int			ft_dllstcmp(t_dllist *l1, t_dllist *l2, int (*cmp)(void *, void *));
 int			ft_dllstmatch(t_dllist *find, t_dllist *in,
 				int (*cmp)(void *, void *));
+
+// get_next_line
+char	*get_next_line(int fd);
 
 // linked_list
 typedef struct s_list
