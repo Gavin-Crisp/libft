@@ -17,5 +17,6 @@ typedef struct s_chunk
 
 t_heap		*get_heap(void);
 t_chunk		*new_heap_chunk(void *start, size_t size, int is_free);
+t_dllist	*find_chunk(void *ptr);
 
 #endif
