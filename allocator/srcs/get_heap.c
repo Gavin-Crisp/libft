@@ -6,7 +6,7 @@ t_heap	*get_heap(void)
 
 	if (!heap.meta)
 	{
-		heap.meta = ft_lstnew(new_heap_chuck(
+		heap.meta = ft_dllstnew(new_heap_chuck(
 				heap.data,
 				ALLOC_HEAP_CAPACITY,
 				1));

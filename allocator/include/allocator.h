@@ -4,7 +4,7 @@
 
 typedef struct s_heap
 {
-	t_list	*meta;
+	t_dllist	*meta;
 	unsigned char data[ALLOC_HEAP_CAPACITY];
 }	t_heap;
 
