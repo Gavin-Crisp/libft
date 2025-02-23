@@ -3,10 +3,10 @@ NAME		:= $(notdir $(shell pwd))
 SRC_DIR		:= .
 SRCS		:= \
 	add_back add_front clear find \
-	index is_sorted iter last \
-	map max min new \
-	pop remove size split_before \
-	split
+	find_closest index is_sorted iter \
+	last map max min \
+	new pop remove size \
+	split_before split
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_lst%.c,$(SRCS))
 
 ifndef BUILD_DIR
