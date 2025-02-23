@@ -4,8 +4,8 @@ export ROOT			:= $(shell pwd)
 export BUILD_DIR	:= $(ROOT)/.build
 
 COMPONENTS			:= \
-	binary_tree char converters doubly_linked_list \
-	linked_list memory string
+	allocator binary_tree char converters \
+	doubly_linked_list linked_list memory string
 
 export CC			?= cc
 export CFLAGS		?= -Wall -Werror -Wextra
