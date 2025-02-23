@@ -1,8 +1,15 @@
 #include "allocator.h"
 
-unsigned char	*get_heap(void)
+t_heap	*get_heap(void)
 {
-	static unsigned char heap[ALLOC_HEAP_CAPACITY] = {0};
+	static t_heap	heap = {0};
 
-	return (heap);
+	if (!heap.meta)
+	{
+		heap.meta = ft_lstnew(new_heap_chuck(
+				heap.data,
+				ALLOC_HEAP_CAPACITY,
+				1));
+	}
+	return (&heap);
 }
