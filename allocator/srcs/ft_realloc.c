@@ -40,7 +40,7 @@ void	*ft_realloc(void *ptr, size_t new_size)
 		return (ft_malloc(new_size));
 	if (!new_size)
 	{
-		free(ptr);
+		ft_free(ptr);
 		return (0);
 	}
 	chunks = find_chunk(ptr);
