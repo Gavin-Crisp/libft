@@ -69,7 +69,8 @@ t_dllist	*ft_dllstfind_closest(
 				int (*cmp)(void *, void *)
 			);
 t_dllist	*ft_dllstfirst(t_dllist *elem);
-t_dllist	*ft_dllstindex(t_dllist *head, size_t index);
+t_dllist	*ft_dllstindex_after(t_dllist *head, size_t index);
+t_dllist	*ft_dllstindex_before(t_dllist *head, size_t index);
 void		ft_dllstinsert_after(t_dllist *elem, t_dllist *new);
 void		ft_dllstinsert_before(t_dllist *elem, t_dllist *new);
 int			ft_dllstis_sorted(t_dllist *head, int (*cmp)(void *, void *));
@@ -82,7 +83,12 @@ int			ft_dllstmatch(
 			);
 t_dllist	*ft_dllstnew(void *data);
 void		ft_dllstremove_elem(t_dllist **elemptr, void (*fr)(void *));
-void		ft_dllstremove(
+void		ft_dllstremove_after(
+				t_dllist **headptr,
+				size_t index,
+				void (*free)(void *)
+			);
+void		ft_dllstremove_before(
 				t_dllist **headptr,
 				size_t index,
 				void (*free)(void *)

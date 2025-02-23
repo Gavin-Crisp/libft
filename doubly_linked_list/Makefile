@@ -3,10 +3,10 @@ NAME		:= $(notdir $(shell pwd))
 SRC_DIR		:= .
 SRCS		:= \
 	add_front clear cmp find \
-	find_closest first add_back index \
-	insert_after insert_before is_sorted iter \
-	last match new remove_elem \
-	remove size
+	find_closest first add_back index_after \
+	index_before insert_after insert_before is_sorted \
+	iter last match new \
+	remove_elem remove_after remove_before size
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
 ifndef BUILD_DIR

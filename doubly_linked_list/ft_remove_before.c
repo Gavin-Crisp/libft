@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   index.c                                            :+:      :+:    :+:   */
+/*   remove.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 09:08:25 by gcrisp            #+#    #+#             */
-/*   Updated: 2023/05/15 09:17:48 by gcrisp           ###   ########.fr       */
+/*   Created: 2023/05/09 09:16:16 by gcrisp            #+#    #+#             */
+/*   Updated: 2023/05/09 11:39:35 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_dllist	*ft_dllstindex(t_dllist *head, size_t index)
+void	ft_dllstremove_before(t_dllist	**headptr, size_t index, void (*fr)(void *))
 {
-	while (index-- && head)
-		head = head->next;
-	return (head);
+	t_dllist	*elem;
+
+	if (!headptr)
+		return ;
+	elem = ft_dllstindex_before(*headptr, index);
+	if (!elem)
+		return ;
+	ft_dllstremove_elem(&elem, fr);
 }
