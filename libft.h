@@ -60,26 +60,40 @@ typedef struct s_dllist
 	void			*data;
 }	t_dllist;
 
-t_dllist	*ft_dllstnew(void *data);
-t_dllist	*ft_dllstlast(t_dllist *head);
+void		ft_dllstadd_back(t_dllist **headptr, t_dllist *new);
+void		ft_dllstadd_front(t_dllist **headptr, t_dllist *new);
+void		ft_dllstclear(t_dllist **headptr, void (*free)(void *));
+int			ft_dllstcmp(t_dllist *l1, t_dllist *l2, int (*cmp)(void *, void *));
+t_dllist	*ft_dllstfind(
+				t_dllist *head,
+				void *ref,
+				int (*cmp)(void *, void *)
+			);
+t_dllist	*ft_dllstfind_closest(
+				t_dllist *head,
+				void *ref,
+				int (*cmp)(void *, void *)
+			);
 t_dllist	*ft_dllstfirst(t_dllist *elem);
 t_dllist	*ft_dllstindex(t_dllist *head, size_t index);
-t_dllist	*ft_dllstfind(t_dllist *head, void *ref,
-				int (*cmp)(void *, void *));
-void		ft_dllstadd_front(t_dllist **headptr, t_dllist *new);
-void		ft_dllstadd_back(t_dllist **headptr, t_dllist *new);
-void		ft_dllstinsert_before(t_dllist *elem, t_dllist *new);
 void		ft_dllstinsert_after(t_dllist *elem, t_dllist *new);
-void		ft_dllstremove(t_dllist **headptr, size_t index,
-				void (*free)(void *));
-void		ft_dllstremove_elem(t_dllist **elemptr, void (*fr)(void *));
-void		ft_dllstclear(t_dllist **headptr, void (*free)(void *));
-void		ft_dllstiter(t_dllist *head, void (*f)(void *));
-size_t		ft_dllstsize(t_dllist *head);
+void		ft_dllstinsert_before(t_dllist *elem, t_dllist *new);
 int			ft_dllstis_sorted(t_dllist *head, int (*cmp)(void *, void *));
-int			ft_dllstcmp(t_dllist *l1, t_dllist *l2, int (*cmp)(void *, void *));
-int			ft_dllstmatch(t_dllist *find, t_dllist *in,
-				int (*cmp)(void *, void *));
+void		ft_dllstiter(t_dllist *head, void (*f)(void *));
+t_dllist	*ft_dllstlast(t_dllist *head);
+int			ft_dllstmatch(
+				t_dllist *find,
+				t_dllist *in,
+				int (*cmp)(void *, void *)
+			);
+t_dllist	*ft_dllstnew(void *data);
+void		ft_dllstremove_elem(t_dllist **elemptr, void (*fr)(void *));
+void		ft_dllstremove(
+				t_dllist **headptr,
+				size_t index,
+				void (*free)(void *)
+			);
+size_t		ft_dllstsize(t_dllist *head);
 
 // get_next_line
 char		*get_next_line(int fd);
