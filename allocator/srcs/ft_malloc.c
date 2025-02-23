@@ -1,31 +1,52 @@
 #include "allocator.h"
 
-static int	size_diff(void *vchunk, void *vsize)
+static t_chunk	*get_best_fit(t_chunk *chunks, size_t size)
 {
-	size_t	*psize;
-	t_chunk	*chunk;
+	t_chunk	*out;
+	size_t	diff;
+	size_t	best_diff;
 
-	psize = vsize;
-	chunk = vchunk;
-	if (*psize < chunk->size)
-		return (chunk->size - *psize);
-	return (*psize - chunk->size);
+	out = 0;
+	best_diff = SIZE_MAX;
+	while (chunks)
+	{
+		if (chunks->is_free && size <= chunks->size)
+		{
+			diff = chunks->size - size;
+			if (!diff)
+				return (out);
+			if (diff < best_diff)
+			{
+				best_diff = diff;
+				out = chunks;
+			}
+		}
+		chunks = chunks->next;
+	}
+	return (out);
+}
+
+static void	insert_chunk(t_chunk *chunks, t_chunk *new)
+{
+	new->next = chunks->next;
+	new->prev = chunks;
+	chunks->next = new;
+	if (new->next)
+		new->next->prev = new;
 }
 
 void	*ft_malloc(size_t size)
 {
-	t_heap		*heap;
-	t_dllist	*best_chunk;
+	t_chunk	*best_chunk;
 
 	if (!size)
 		return (0);
-	heap = get_heap();
-	best_chunk = ft_dllstfind_closest(heap->meta, &size, size_diff);
-	((t_chunk *)(best_chunk->data))->is_free = 0;
-	ft_dllstadd_front(&best_chunk->next, ft_lstnew(new_heap_chunk(
-		(size_t)((t_chunk *)(best_chunk->data))->start + size,
-		((t_chunk *)(best_chunk->data))->size - size,
-		1)));
-	((t_chunk *)(best_chunk->data))->size = size;
+	best_chunk = get_best_fit(get_heap()->meta, size);
+	best_chunk->is_free = 0;
+	insert_chunk(best_chunk, new_chunk(
+		(size_t)best_chunk->start + size,
+		best_chunk->size - size,
+		1));
+	best_chunk->size = size;
 	return (0);
 }
