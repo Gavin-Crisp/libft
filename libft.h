@@ -1,7 +1,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-# include <unistd.h>
+// # include <unistd.h>
 # define GNL_BUFFER_SIZE 50
 # define ALLOC_HEAP_CAPACITY 32768
 
@@ -159,5 +159,19 @@ char		*ft_strnstr(const char *h, const char *n, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+// vector
+typedef struct s_vector
+{
+	void	*data;
+	size_t	length;
+	size_t	_capacity;
+}	t_vector;
+
+t_vector	*ft_vecnew();
+void		ft_vecfree(t_vector **pvec);
+void		*ft_vecindex(t_vector *vec, size_t index);
+void		ft_vecpush(t_vector *vec, void *elem);
+void		*ft_vecpop(t_vector *vec, size_t index);
 
 #endif
