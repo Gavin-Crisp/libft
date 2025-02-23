@@ -3,7 +3,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # define GNL_BUFFER_SIZE 50
-# define ALLOC_HEAP_CAPACITY 8192
+# define ALLOC_HEAP_CAPACITY 32768
 
 //allocator
 void		*ft_malloc(size_t size);
