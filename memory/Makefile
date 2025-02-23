@@ -6,28 +6,23 @@ SRCS		:= \
 	memcpy memmove memset
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
-ifndef OBJ_DIR
-	_OBJ_DIR = .objs
+ifndef BUILD_DIR
+_BUILD_DIR	:= .build
 else
-	_OBJ_DIR = $(OBJ_DIR)/$(NAME)
+_BUILD_DIR	:= $(BUILD_DIR)/$(NAME)
 endif
-OBJS		:= $(patsubst $(SRC_DIR)/%.c,$(_OBJ_DIR)/%.o,$(SRCS))
-ifndef DEP_DIR
-	_DEP_DIR = .deps
-else
-	_DEP_DIR = $(DEP_DIR)/$(NAME)
-endif
-DEPS		:= $(patsubst $(SRC_DIR)/%.c,$(_DEP_DIR)/%.d,$(SRCS))
+
+OBJS		:= $(patsubst $(SRC_DIR)/%.c,$(_BUILD_DIR)/%.o,$(SRCS))
+DEPS		:= $(patsubst %.o,%.d,$(OBJS))
 
 CC			?= cc
 CFLAGS		?= -Wall -Wextra -Werror
-CPPFLAGS	= -I $(ROOT) -MT $@ -MMD -MP -MF $(_DEP_DIR)/$*.d
+CPPFLAGS	:= -I $(ROOT) -MMD -MP
 
 all: $(OBJS)
 
-$(_OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(_BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	mkdir -p $(dir $(_DEP_DIR)/$*.d)
 	$(CC) $(CFLAGS) $(CPPFLAGS)
 	echo CREATED $(@F)
 
@@ -35,7 +30,7 @@ $(_OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	for f in $(OBJS); rm -f $$f; echo REMOVED $(notdir $$f); done
-	rm -rf $(_OBJ_DIR) $(_DEP_DIR)
+	rm -rf $(_BUILD_DIR)
 
 re:
 	$(MAKE) clean
