@@ -1,8 +1,9 @@
 NAME		:= $(notdir $(shell pwd))
 
 SRC_DIR		:= srcs
-SRCS		:=
-SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
+SRCS		:= \
+	ft_free ft_malloc ft_realloc util
+SRCS		:= $(patsubst %,$(SRC_DIR)/%.c,$(SRCS))
 
 ifndef BUILD_DIR
 _BUILD_DIR	:= .build
