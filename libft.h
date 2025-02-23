@@ -166,12 +166,16 @@ typedef struct s_vector
 	void	*data;
 	size_t	length;
 	size_t	_capacity;
+	size_t	_elem_size;
 }	t_vector;
 
-t_vector	*ft_vecnew();
+t_vector	*ft_vecnew(size_t length, size_t elem_size);
+t_vector	*ft_vecnew_from_array(void *elements, size_t length, size_t elem_size);
+t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_size);
 void		ft_vecfree(t_vector **pvec);
 void		*ft_vecindex(t_vector *vec, size_t index);
 void		ft_vecpush(t_vector *vec, void *elem);
 void		*ft_vecpop(t_vector *vec, size_t index);
+void		ft_vecremove(t_vector *vec, size_t index, void (*free)(void *));
 
 #endif
