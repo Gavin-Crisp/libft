@@ -3,7 +3,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # define GNL_BUFFER_SIZE 50
+# define ALLOC_HEAP_CAPACITY 8192
 
+//allocator
+void		*ft_malloc(size_t size);
+void		ft_free(void *ptr);
+void		*ft_realloc(void *ptr, size_t new_size);
 
 // binary_tree
 typedef struct s_btree
