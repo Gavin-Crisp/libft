@@ -42,10 +42,12 @@ void	*ft_malloc(size_t size)
 	if (!size)
 		return (0);
 	best_chunk = get_best_fit(get_heap()->meta, size);
+	if (!best_chunk)
+		return (0);
 	best_chunk->is_free = 0;
 	insert_chunk(best_chunk, new_chunk(
-		(size_t)best_chunk->start + size,
-		best_chunk->size - size,
+		best_chunk + sizeof(t_chunk) + size,
+		best_chunk->size - size - sizeof(t_chunk),
 		1));
 	best_chunk->size = size;
 	return (0);

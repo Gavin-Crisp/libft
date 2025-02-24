@@ -2,12 +2,12 @@
 
 void	ft_free(void *ptr)
 {
-	t_chunk	*chunks;
+	t_chunk	*chunk;
 
 	if (!ptr)
 		return ;
-	chunks = find_chunk(ptr);
-	if (!chunks || chunks->is_free)
+	chunk = ptr - sizeof(t_chunk);
+	if (!is_valid_chunk(chunk) || chunk->is_free)
 		return ;
-	free_chunk(&chunks);
+	free_chunk(&chunk);
 }

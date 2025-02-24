@@ -8,32 +8,22 @@ t_heap	*get_heap(void)
 	{
 		heap.meta = new_chunk(
 				heap.data,
-				ALLOC_HEAP_CAPACITY,
+				ALLOC_HEAP_CAPACITY - sizeof(t_chunk),
 				1);
 	}
 	return (&heap);
 }
 
-t_chunk	*find_chunk(void *ptr)
+int	is_valid_chunk(t_chunk *chunk)
 {
-	t_chunk	*chunks;
-
-	chunks = get_heap()->meta;
-	while (chunks)
-	{
-		if (chunks->start == ptr)
-			return (chunks);
-		chunks = chunks->next;
-	}
-	return (0);
+	return (chunk->prev->next == chunk);
 }
 
-t_chunk	*new_chunk(void *start, size_t size, int is_free)
+t_chunk	*new_chunk(void *addr, size_t size, int is_free)
 {
 	t_chunk	*out;
 
-	out = malloc(sizeof(t_chunk));
-	out->start = start;
+	out = addr;
 	out->size = size;
 	out->is_free = is_free;
 	out->prev = 0;
@@ -58,15 +48,14 @@ void	remove_chunk(t_chunk **pchunk)
 	}
 	if (*pchunk == chunk)
 		*pchunk = 0;
-	free(chunk);
 }
 
 void	free_chunk(t_chunk **pchunks)
 {
-	remove_chunk(pchunks);
-	if ((*pchunks)->is_free && (t_chunk *)(*pchunks)->prev->is_free)
+	(*pchunks)->is_free = 1;
+	while (*pchunks && (*pchunks)->is_free && (*pchunks)->prev->is_free)
 	{
-		(*pchunks)->prev->size += (*pchunks)->size;
+		(*pchunks)->prev->size += (*pchunks)->size + sizeof(t_chunk);
 		remove_chunk(pchunks);
 	}
 	*pchunks = 0;

@@ -11,16 +11,15 @@ typedef struct s_heap
 typedef struct s_chunk t_chunk;
 struct s_chunk
 {
-	const void	*start;
-	size_t		size;
-	int			is_free;
-	t_chunk		*prev;
-	t_chunk		*next;
+	t_chunk	*prev;
+	size_t	size;
+	int		is_free;
+	t_chunk	*next;
 };
 
 t_heap	*get_heap(void);
-t_chunk	*new_chunk(void *start, size_t size, int is_free);
+t_chunk	*new_chunk(void *addr, size_t size, int is_free);
 void	free_chunk(t_chunk **pchunks);
-t_chunk	*find_chunk(void *ptr);
+int		is_valid_chunk(t_chunk *chunk);
 
 #endif
