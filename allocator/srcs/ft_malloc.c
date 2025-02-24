@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 12:26:57 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/24 12:27:30 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "allocator.h"
 
 static int	size_diff(void *vchunk, void *vsize)
@@ -23,9 +35,9 @@ void	*ft_malloc(size_t size)
 	best_chunk = ft_dllstfind_closest(heap->meta, &size, size_diff);
 	((t_chunk *)(best_chunk->data))->is_free = 0;
 	ft_dllstadd_front(&best_chunk->next, ft_dllstnew(new_heap_chunk(
-		(size_t)((t_chunk *)(best_chunk->data))->start + size,
-		((t_chunk *)(best_chunk->data))->size - size,
-		1)));
+				((t_chunk *)(best_chunk->data))->start + size,
+				((t_chunk *)(best_chunk->data))->size - size,
+				1)));
 	((t_chunk *)(best_chunk->data))->size = size;
 	return (0);
 }

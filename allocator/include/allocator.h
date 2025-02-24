@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   allocator.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 12:25:54 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/24 12:25:55 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ALLOCATOR_H
 # define ALLOCATOR_H
 # include "libft.h"
@@ -10,9 +22,9 @@ typedef struct s_heap
 
 typedef struct s_chunk
 {
-	const void	*start;
-	size_t		size;
-	int			is_free;
+	void	*start;
+	size_t	size;
+	int		is_free;
 }	t_chunk;
 
 void		free_chunk(t_dllist **pchunks);

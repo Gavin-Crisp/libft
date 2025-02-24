@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/24 12:26:39 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
@@ -67,13 +79,11 @@ int			ft_dllstcmp(t_dllist *l1, t_dllist *l2, int (*cmp)(void *, void *));
 t_dllist	*ft_dllstfind(
 				t_dllist *head,
 				void *ref,
-				int (*cmp)(void *, void *)
-			);
+				int (*cmp)(void *, void *));
 t_dllist	*ft_dllstfind_closest(
 				t_dllist *head,
 				void *ref,
-				int (*cmp)(void *, void *)
-			);
+				int (*cmp)(void *, void *));
 t_dllist	*ft_dllstfirst(t_dllist *elem);
 t_dllist	*ft_dllstindex_after(t_dllist *head, size_t index);
 t_dllist	*ft_dllstindex_before(t_dllist *head, size_t index);
@@ -85,20 +95,17 @@ t_dllist	*ft_dllstlast(t_dllist *head);
 int			ft_dllstmatch(
 				t_dllist *find,
 				t_dllist *in,
-				int (*cmp)(void *, void *)
-			);
+				int (*cmp)(void *, void *));
 t_dllist	*ft_dllstnew(void *data);
 void		ft_dllstremove_elem(t_dllist **elemptr, void (*fr)(void *));
 void		ft_dllstremove_after(
 				t_dllist **headptr,
 				size_t index,
-				void (*free)(void *)
-			);
+				void (*free)(void *));
 void		ft_dllstremove_before(
 				t_dllist **headptr,
 				size_t index,
-				void (*free)(void *)
-			);
+				void (*free)(void *));
 size_t		ft_dllstsize(t_dllist *head);
 
 // get_next_line
@@ -115,7 +122,10 @@ void		ft_lstadd_back(t_list **headptr, t_list *new);
 void		ft_lstadd_front(t_list **headptr, t_list *new);
 void		ft_lstclear(t_list **headptr, void (*f_free)(void *));
 t_list		*ft_lstfind(t_list *head, void *ref, int (*cmp)(void *, void *));
-t_list		*ft_lstfind_closest(t_list *head, void *ref, int (*cmp)(void *, void *));
+t_list		*ft_lstfind_closest(
+				t_list *head,
+				void *ref,
+				int (*cmp)(void *, void *));
 t_list		*ft_lstindex(t_list *head, size_t index);
 int			ft_lstis_sorted(t_list *head, int (*cmp)(void *, void *));
 void		ft_lstiter(t_list *head, void (*f)(void *));
@@ -125,7 +135,10 @@ size_t		ft_lstmax(t_list *head, int (*cmp)(void *, void *));
 size_t		ft_lstmin(t_list *head, int (*cmp)(void *, void *));
 t_list		*ft_lstnew(void *data);
 t_list		*ft_lstpop(t_list **headptr, size_t index);
-void		ft_lstremove(t_list **headptr, size_t index, void (*f_free)(void *));
+void		ft_lstremove(
+				t_list **headptr,
+				size_t index,
+				void (*f_free)(void *));
 size_t		ft_lstsize(t_list *head);
 t_list		*ft_lstsplit_before(t_list **headptr, int (*pred)(void *));
 t_list		*ft_lstsplit(t_list **headptr, int (*pred)(void *),

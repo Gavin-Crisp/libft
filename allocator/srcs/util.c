@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 12:24:14 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/24 12:24:30 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "allocator.h"
 
 int	cmp_ptrs(void *vchunk, void *ptr)
@@ -20,9 +32,9 @@ t_heap	*get_heap(void)
 	if (!heap.meta)
 	{
 		heap.meta = ft_dllstnew(new_heap_chunk(
-				heap.data,
-				ALLOC_HEAP_CAPACITY,
-				1));
+					heap.data,
+					ALLOC_HEAP_CAPACITY,
+					1));
 	}
 	return (&heap);
 }
