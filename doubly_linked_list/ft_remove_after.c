@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove.c                                           :+:      :+:    :+:   */
+/*   ft_remove_after.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 09:16:16 by gcrisp            #+#    #+#             */
-/*   Updated: 2023/05/09 11:39:35 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:23:39 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_dllstremove_after(t_dllist	**headptr, size_t index, void (*fr)(void *))
+void	ft_dllstremove_after(
+	t_dllist **headptr,
+	size_t index,
+	void (*fr)(void *))
 {
 	t_dllist	*elem;
 

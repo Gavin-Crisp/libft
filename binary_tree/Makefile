@@ -3,7 +3,7 @@ NAME		:= $(notdir $(shell pwd))
 SRC_DIR		:= .
 SRCS		:= \
 	balance_factor balance clear height \
-	inser_balanced insert is_balanced new \
+	insert_balanced insert is_balanced new \
 	rotate_left rotate_right search size
 SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
@@ -20,17 +20,20 @@ CC			?= cc
 CFLAGS		?= -Wall -Wextra -Werror
 CPPFLAGS	:= -I $(ROOT) -MMD -MP
 
-all: $(OBJS)
+all: .finished_comp
+
+.finished_comp: $(OBJS)
+	touch $(_BUILD_DIR)/.finished_comp
 
 $(_BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 	echo CREATED $(@F)
 
 -include $(DEPS)
 
 clean:
-	for f in $(OBJS); rm -f $$f; echo REMOVED $(notdir $$f); done
+	for f in $(OBJS); do if [ -f $$f ]; then rm $$f && echo "REMOVED $$(basename $$f)"; fi ; done
 	rm -rf $(_BUILD_DIR)
 
 re:

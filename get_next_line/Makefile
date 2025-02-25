@@ -17,17 +17,20 @@ CC			?= cc
 CFLAGS		?= -Wall -Wextra -Werror
 CPPFLAGS	:= $(addprefix -I ,$(ROOT) include) -MMD -MP
 
-all: $(OBJS)
+all: .finished_comp
+
+.finished_comp: $(OBJS)
+	touch $(_BUILD_DIR)/.finished_comp
 
 $(_BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 	echo CREATED $(@F)
 
 -include $(DEPS)
 
 clean:
-	for f in $(OBJS); rm -f $$f; echo REMOVED $(notdir $$f); done
+	for f in $(OBJS); do if [ -f $$f ]; then rm $$f && echo "REMOVED $$(basename $$f)"; fi ; done
 	rm -rf $(_BUILD_DIR)
 
 re:

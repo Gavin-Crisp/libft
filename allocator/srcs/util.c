@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 12:24:14 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/02/24 12:24:30 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "allocator.h"
 
 t_heap	*get_heap(void)
@@ -6,10 +18,17 @@ t_heap	*get_heap(void)
 
 	if (!heap.meta)
 	{
+<<<<<<< HEAD
 		heap.meta = new_chunk(
 				heap.data,
 				ALLOC_HEAP_CAPACITY - sizeof(t_chunk),
 				1);
+=======
+		heap.meta = ft_dllstnew(new_heap_chunk(
+					heap.data,
+					ALLOC_HEAP_CAPACITY,
+					1));
+>>>>>>> 9e5e304f256bfa3bb0b46bcb6fe2c21807b18e13
 	}
 	return (&heap);
 }
