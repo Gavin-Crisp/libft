@@ -12,39 +12,55 @@
 
 #include "allocator.h"
 
-static void	*contract_alloc(t_chunk *chunks, size_t new_size)
+static void	*contract_alloc(t_chunk *chunk, size_t new_size)
 {
 	t_chunk	*new;
 
-	new = new_chunk(chunks + new_size, chunks->size - new_size, 1);
-	new->next = chunks->next;
-	chunks->next = new;
-	new->prev = chunks;
-	if (!new->next)
-		return (chunks + sizeof(t_chunk));
-	new->next->prev = new;
-	return (chunks + sizeof(t_chunk));
+	if (chunk->size - new_size < sizeof(t_chunk))
+		return (chunk_start(chunk));
+	new = new_chunk(chunk + new_size + sizeof(t_chunk), chunk, chunk->size - new_size - sizeof(t_chunk), 1);
+	chunk->size = new_size;
+	chunk_next(new)->prev = new;
+	merge_with_next(new);
+	return (chunk_start(chunk));
 }
 
-static void	*expand_alloc(t_chunk *chunks, size_t new_size)
+static void	*expand_alloc(t_chunk *chunk, size_t new_size)
 {
-	t_chunk	*old;
 	t_chunk	*new;
+	size_t	comb_size;
+
+	comb_size = chunk->size + chunk_next(chunk)->size;
+	chunk->size = new_size;
+	if (comb_size + sizeof(t_chunk) == new_size)
+	{
+		chunk_next(chunk)->prev = chunk;
+		return(chunk_start(chunk));
+	}
+	new = new_chunk(chunk_next(chunk), chunk, comb_size - new_size, 1);
+	chunk_next(new)->prev = new;
+	return (chunk_start(chunk));
 }
 
-static void	*move_alloc(t_chunk *chunks, size_t new_size)
+static void	*move_alloc(t_chunk *chunk, size_t new_size)
 {
 	void	*out;
 
 	out = ft_malloc(new_size);
-	ft_memcpy(out, chunks->start, chunks->size);
-	free_chunk(&chunks);
+	ft_memcpy(out, chunk_start(chunk), chunk->size);
+	chunk->is_free = 1;
+	if (chunk->prev->is_free)
+	{
+		chunk = chunk->prev;
+		merge_with_next(chunk);
+	}
+	merge_with_next(chunk);
 	return (out);
 }
 
 void	*ft_realloc(void *ptr, size_t new_size)
 {
-	t_chunk	*chunks;
+	t_chunk	*chunk;
 
 	if (!ptr)
 		return (ft_malloc(new_size));
@@ -53,14 +69,14 @@ void	*ft_realloc(void *ptr, size_t new_size)
 		ft_free(ptr);
 		return (0);
 	}
-	chunks = ptr - sizeof(t_chunk);
-	if (!is_valid_chunk(chunks) || chunks->is_free)
+	chunk = ptr - sizeof(t_chunk);
+	if (chunk->is_free || !chunk_is_valid(chunk))
+		return (ft_malloc(new_size));
+	if (new_size == chunk->size)
 		return (ptr);
-	if (new_size == chunks->size)
-		return (ptr);
-	if (new_size < chunks->size)
+	if (new_size < chunk->size)
 		return (contract_alloc(ptr, new_size));
-	if (chunks->size + chunks->next->size <= new_size && chunks->next->is_free)
-		return (expand_alloc(chunks, new_size));
-	return (move_alloc(chunks, new_size));
+	if (chunk_next(chunk)->is_free && chunk->size + chunk_next(chunk)->size + sizeof(t_chunk) >= new_size)
+		return (expand_alloc(chunk, new_size));
+	return (move_alloc(chunk, new_size));
 }
