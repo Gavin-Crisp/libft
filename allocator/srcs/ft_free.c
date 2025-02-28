@@ -6,33 +6,26 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:25:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/24 12:25:44 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/02/25 12:15:13 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "allocator.h"
 
-void	free_chunk(t_dllist **pchunks)
-{
-	ft_dllstremove_elem(pchunks, free);
-	if (((t_chunk *)(*pchunks)->data)->is_free
-		&& ((t_chunk *)(*pchunks)->prev->data)->is_free)
-	{
-		((t_chunk *)(*pchunks)->prev->data)->size
-			+= ((t_chunk *)(*pchunks)->data)->size;
-		ft_dllstremove_elem(pchunks, free);
-	}
-	*pchunks = 0;
-}
-
 void	ft_free(void *ptr)
 {
-	t_dllist	*chunks;
+	t_chunk	*chunk;
 
 	if (!ptr)
 		return ;
-	chunks = find_chunk(ptr);
-	if (!chunks || ((t_chunk *)chunks->data)->is_free)
+	chunk = ptr - sizeof(t_chunk);
+	if (chunk->is_free || !is_valid_chunk(chunk))
 		return ;
-	free_chunk(&chunks);
+	chunk->is_free = 1;
+	if (chunk->prev->is_free)
+	{
+		chunk = chunk->prev;
+		merge_with_next(chunk);
+	}
+	merge_with_next(chunk);
 }
