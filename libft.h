@@ -13,7 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-# include <unistd.h>
+// # include <unistd.h>
 # define GNL_BUFFER_SIZE 50
 # define ALLOC_HEAP_CAPACITY 32768
 
@@ -174,5 +174,30 @@ char		*ft_strnstr(const char *h, const char *n, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strtrim(char const *s, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+// vector
+typedef struct s_vector
+{
+	void	*data;
+	size_t	length;
+	size_t	_capacity;
+	size_t	_elem_size;
+}	t_vector;
+
+int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
+void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
+void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
+void		*ft_vecindex(t_vector *vec, size_t index);
+int			ft_vecinsert(t_vector *vec, void *elem, size_t index);
+t_vector	*ft_vecmap(t_vector *vec, void *(*map)(void *, size_t));
+t_vector	*ft_vecnew_from_array(void *elements, size_t length, size_t elem_size);
+t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_size);
+t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size);
+t_vector	*ft_vecnew(size_t elem_size);
+void		*ft_vecpop_first(t_vector *vec);
+void		*ft_vecpop_last(t_vector *vec);
+int			ft_vecpush_first(t_vector *vec, void *elem);
+int			ft_vecpush_last(t_vector *vec, void *elem);
+void		*ft_vecremove(t_vector *vec, size_t index);
 
 #endif
