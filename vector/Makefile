@@ -1,8 +1,12 @@
 NAME		:= $(notdir $(shell pwd))
 
 SRC_DIR		:= .
-SRCS		:=
-SRCS		:= $(patsubst %,$(SRC_DIR)/ft_lst%.c,$(SRCS))
+SRCS		:= \
+	delete for_each free index \
+	insert map new_from_array new_from_func \
+	new_with_capacity new pop_first pop_last \
+	push_first push_last remove
+SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 
 ifndef BUILD_DIR
 _BUILD_DIR	:= .build

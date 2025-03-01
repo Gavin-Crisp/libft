@@ -6,7 +6,10 @@ void	ft_vecfree(t_vector **pvec, void (*clear)(void *))
 
 	i = 0;
 	while (i < (*pvec)->length)
-		clear(ft_vecindex(*pvec, i++));
+	{
+		if (clear)
+			clear(ft_vecindex(*pvec, i++));
+	}
 	ft_free((*pvec)->data);
 	free(*pvec);
 	*pvec = 0;
