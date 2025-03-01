@@ -5,7 +5,8 @@ export BUILD_DIR	:= $(ROOT)/.build
 
 COMPONENTS			:= \
 	allocator binary_tree char converters \
-	doubly_linked_list linked_list memory string
+	doubly_linked_list linked_list memory string \
+	vector
 COMP_CHECKS			:= $(patsubst %,$(BUILD_DIR)/%/.finished_comp,$(COMPONENTS))
 
 export CC			?= cc
