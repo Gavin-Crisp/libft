@@ -6,11 +6,8 @@ t_vector	*ft_vecmap(t_vector *vec, void *(*map)(void *, size_t))
 	size_t		i;
 	void		*new_elem;
 
-	out = malloc(sizeof(t_vector));
+	out = ft_vecnew_with_capacity(vec->length, vec->_elem_size);
 	out->length = vec->length;
-	out->_capacity = vec->_capacity;
-	out->_elem_size = vec->_elem_size;
-	out->data = ft_malloc(out->_capacity);
 	i = 0;
 	while (i < vec->length)
 	{

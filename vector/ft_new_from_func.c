@@ -6,11 +6,8 @@ t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_s
 	size_t		i;
 	void		*new_elem;
 
-	out = malloc(sizeof(t_vector));
+	out = ft_vecnew_with_capacity(length, elem_size);
 	out->length = length;
-	out->_elem_size = elem_size;
-	out->_capacity = length * elem_size;
-	out->data = ft_malloc(out->_capacity);
 	i = 0;
 	while (i < length)
 	{

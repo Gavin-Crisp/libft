@@ -10,7 +10,7 @@ void	*ft_vecremove(t_vector *vec, size_t index)
 	elem = malloc(vec->_elem_size);
 	mem_loc = ft_vecindex(vec, index);
 	ft_memcpy(elem, mem_loc, vec->_elem_size);
-	ft_memmove(mem_loc, mem_loc + vec->_elem_size, vec->length - index - 1);
+	ft_memmove(mem_loc, mem_loc + vec->_elem_size, (vec->length - index - 1) * vec->_elem_size);
 	vec->length--;
 	return (elem);
 }

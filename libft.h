@@ -188,16 +188,19 @@ int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
 void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
 void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
 void		*ft_vecindex(t_vector *vec, size_t index);
+int			ft_vecinsert_elems(t_vector *vec, void *elems, size_t num_elems, size_t index);
 int			ft_vecinsert(t_vector *vec, void *elem, size_t index);
 t_vector	*ft_vecmap(t_vector *vec, void *(*map)(void *, size_t));
 t_vector	*ft_vecnew_from_array(void *elements, size_t length, size_t elem_size);
 t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_size);
 t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size);
 t_vector	*ft_vecnew(size_t elem_size);
-void		*ft_vecpop_first(t_vector *vec);
-void		*ft_vecpop_last(t_vector *vec);
-int			ft_vecpush_first(t_vector *vec, void *elem);
-int			ft_vecpush_last(t_vector *vec, void *elem);
+void		*ft_vecpop_elems(t_vector *vec, size_t num_elems);
+void		*ft_vecpop(t_vector *vec);
+int			ft_vec_push_elems(t_vector *vec, void *elems, size_t num_elems);
+int			ft_vecpush(t_vector *vec, void *elem);
+void		*ft_vecremove_elems(t_vector *vec, size_t index, size_t num_elems);
 void		*ft_vecremove(t_vector *vec, size_t index);
+void		ft_vecreserve(t_vector *vec, size_t num_elems);
 
 #endif
