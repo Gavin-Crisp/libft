@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 10:30:37 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/03 10:35:58 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_vecfree(t_vector **pvec, void (*clear)(void *))
 {
 	size_t	i;
 
-	i = 0;
-	while (i < (*pvec)->length)
+	if (clear)
 	{
-		if (clear)
+		i = 0;
+		while (i < (*pvec)->length)
 			clear(ft_vecindex(*pvec, i++));
 	}
 	ft_free((*pvec)->data);

@@ -1,16 +1,16 @@
 export NAME		:= $(notdir $(shell pwd))
 
-SRC_DIR		:= srcs
+export SRC_DIR:= srcs
 SRCS		:= get_next_line utils
 export SRCS		:= $(patsubst %,$(SRC_DIR)/%.c,$(SRCS))
 
-export CPPFLAGS	:= $(addprefix -I ,$(ROOT) include) -MMD -MP
+export CPPFLAGS	:= $(addprefix -I ,$(ROOT) $(ROOT)/$(NAME)/include) -MMD -MP
 
 all:
-	$(MAKE) -f $(ROOT)/component.mk
+	$(MAKE) -C $(ROOT) -f component.mk
 
 clean:
-	$(MAKE) -f $(ROOT)/component.mk clean
+	$(MAKE) -C $(ROOT) -f component.mk clean
 
 re: clean all
 

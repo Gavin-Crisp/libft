@@ -1,6 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_new_from_func.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 10:31:00 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/03 10:32:52 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_size)
+t_vector	*ft_vecnew_from_func(
+	size_t length,
+	void *(*gen)(size_t),
+	size_t elem_size)
 {
 	t_vector	*out;
 	size_t		i;

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:26:57 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 12:15:28 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 10:32:26 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	*ft_malloc(size_t size)
 	best_chunk->is_free = 0;
 	if (best_chunk->size - size >= sizeof(t_chunk))
 	{
-		new = new_chunk(best_chunk + size + sizeof(t_chunk), best_chunk, best_chunk->size - size - sizeof(t_chunk), 1);
+		new = new_chunk(best_chunk + size + sizeof(t_chunk), best_chunk,
+				best_chunk->size - size - sizeof(t_chunk), 1);
 		best_chunk->size = size;
 		chunk_next(new)->prev = new;
 	}

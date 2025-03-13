@@ -1,16 +1,16 @@
 export NAME		:= allocator
 
-SRC_DIR			:= srcs
-SRCS			:= ft_free ft_malloc ft_realloc util
+export SRC_DIR	:= srcs
+SRCS			:= chunk ft_free ft_malloc ft_realloc heap
 export SRCS		:= $(patsubst %,$(SRC_DIR)/%.c,$(SRCS))
 
-export CPPFLAGS	:= $(addprefix -I ,$(ROOT) include) -MMD -MP
+export CPPFLAGS	:= $(addprefix -I ,$(ROOT) $(ROOT)/$(NAME)/include) -MMD -MP
 
 all:
-	$(MAKE) -f $(ROOT)/component.mk
+	$(MAKE) -C $(ROOT) -f component.mk
 
 clean:
-	$(MAKE) -f $(ROOT)/component.mk clean
+	$(MAKE) -C $(ROOT) -f component.mk clean
 
 re: clean all
 

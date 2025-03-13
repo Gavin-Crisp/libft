@@ -25,33 +25,31 @@ endif
 export INDENT_STYLE	?= "    "
 
 define print
-	for (( i=0; i<$(INDENT); i+=1 ))
-	do
-		echo $1
-	done
+a=0; while [ $$a -lt $(INDENT) ]; do echo -n $(INDENT_STYLE); a=`expr $$a + 1`; done; echo $1
 endef
 
 all: $(NAME)
 
 $(NAME): $(COMP_CHECKS)
 	$(AR) $(ARFLAGS) $@ $(wildcard $(BUILD_DIR)/**/*.o)
-	$(eval $(call print,CREATED $@))
+	$(call print,CREATED $@)
 
 $(BUILD_DIR)/%/.finished_comp:
+	$(call print,$*)
 	$(MAKE) -C $*
 
 clean:
-	$(eval $(call print,Cleaning libft...))
-	for f in $(COMPONENTS); do $(MAKE) -C $$f clean; done
+	$(call print,Cleaning libft...)
+	for f in $(COMPONENTS); do $(call print,$$f); $(MAKE) -C $$f clean; done
 	rm -rf $(BUILD_DIR)
-	$(eval $(call print,Done))
+	$(call print,Done)
 
 fclean:
-	$(eval $(call print,Fully cleaning libft...))
-	for f in $(COMPONENTS); do $(MAKE) -C $$f clean; done
+	$(call print,Fully cleaning libft...)
+	for f in $(COMPONENTS); do $(call print,$$f); $(MAKE) -C $$f clean; done
 	rm -rf $(BUILD_DIR)
-	rm -fv $(NAME)
-	$(eval $(call print,Done))
+	if [ -f $(NAME) ]; then rm $(NAME) && $(call print,REMOVED $(NAME)); fi
+	$(call print,Done)
 
 re:
 	$(MAKE) fclean

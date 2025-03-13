@@ -1,6 +1,6 @@
 export NAME		:= $(notdir $(shell pwd))
 
-SRC_DIR			:= .
+export SRC_DIR	:= .
 SRCS			:= \
 	add_front clear cmp find \
 	find_closest first add_back index_after \
@@ -12,10 +12,10 @@ export SRCS		:= $(patsubst %,$(SRC_DIR)/ft_%.c,$(SRCS))
 export CPPFLAGS	:= -I $(ROOT) -MMD -MP
 
 all:
-	$(MAKE) -f $(ROOT)/component.mk
+	$(MAKE) -C $(ROOT) -f component.mk
 
 clean:
-	$(MAKE) -f $(ROOT)/component.mk clean
+	$(MAKE) -C $(ROOT) -f component.mk clean
 
 re: clean all
 

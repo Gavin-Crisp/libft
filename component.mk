@@ -1,37 +1,25 @@
-ifndef BUILD_DIR
-BUILD_DIR			:= .build
-else
 BUILD_DIR			:= $(BUILD_DIR)/$(NAME)
-endif
-OBJS				:= $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+SRCS				:= $(addprefix $(NAME)/,$(SRCS))
+OBJS				:= $(patsubst $(NAME)/$(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 DEPS				:= $(patsubst %.o,%.d,$(OBJS))
 
-CC					?= cc
-CFLAGS				?= -Wall -Wextra -Werror
+FINISHED			:= $(BUILD_DIR)/.finished_comp
 
-ifndef INDENT
-	export INDENT	:= 0
-else
-	export INDENT	:= $(shell echo $$(($(INDENT) + 1)))
-endif
-export INDENT_STYLE	?= "    "
+export INDENT	:= $(shell echo $$(($(INDENT) + 1)))
 
 define print
-	for (( i=0; i<$(INDENT); i+=1 ))
-	do
-		echo $1
-	done
+	a=0; while [ $$a -lt $(INDENT) ]; do echo -n $(INDENT_STYLE); a=`expr $$a + 1`; done; echo $1
 endef
 
-all: .finished_comp
+all: $(FINISHED)
 
-.finished_comp: $(OBJS)
-	touch $(BUILD_DIR)/.finished_comp
+$(FINISHED): $(OBJS)
+	touch $(FINISHED)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(BUILD_DIR)/%.o: $(NAME)/$(SRC_DIR)/%.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	$(eval $(call print,CREATED $(@F)))
+	$(call print,CREATED $(@F))
 
 -include $(DEPS)
 
@@ -41,7 +29,7 @@ clean:
 		if [ -f $$f ]; \
 		then \
 			rm $$f || continue; \
-			$(eval $(call print,"REMOVED $$(basename $$f)")); \
+			$(call print,REMOVED $$(basename $$f)); \
 		fi; \
 	done
 	rm -rf $(BUILD_DIR)

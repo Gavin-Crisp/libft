@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_insert.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/03 10:30:42 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/03 10:37:09 by gcrisp           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void	expand_vec(t_vector *vec)
@@ -18,7 +30,8 @@ int	ft_vecinsert(t_vector *vec, void *elem, size_t index)
 	if (vec->_capacity == vec->length)
 		expand_vec(vec);
 	mem_loc = ft_vecindex(vec, index);
-	ft_memmove(mem_loc + vec->_elem_size, mem_loc, (vec->length - index) * vec->_elem_size);
+	ft_memmove(mem_loc + vec->_elem_size, mem_loc,
+		(vec->length - index) * vec->_elem_size);
 	ft_memcpy(mem_loc, elem, vec->_elem_size);
 	vec->length++;
 	return (1);

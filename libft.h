@@ -6,14 +6,14 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/02/25 14:05:57 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/03 10:31:45 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
-// # include <unistd.h>
+# include <unistd.h>
 # define GNL_BUFFER_SIZE 50
 # define ALLOC_HEAP_CAPACITY 32768
 
@@ -188,11 +188,21 @@ int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
 void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
 void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
 void		*ft_vecindex(t_vector *vec, size_t index);
-int			ft_vecinsert_elems(t_vector *vec, void *elems, size_t num_elems, size_t index);
+int			ft_vecinsert_elems(
+				t_vector *vec,
+				void *elems,
+				size_t num_elems,
+				size_t index);
 int			ft_vecinsert(t_vector *vec, void *elem, size_t index);
 t_vector	*ft_vecmap(t_vector *vec, void *(*map)(void *, size_t));
-t_vector	*ft_vecnew_from_array(void *elements, size_t length, size_t elem_size);
-t_vector	*ft_vecnew_from_func(size_t length, void *(*gen)(size_t), size_t elem_size);
+t_vector	*ft_vecnew_from_array(
+				void *elements,
+				size_t length,
+				size_t elem_size);
+t_vector	*ft_vecnew_from_func(
+				size_t length,
+				void *(*gen)(size_t),
+				size_t elem_size);
 t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size);
 t_vector	*ft_vecnew(size_t elem_size);
 void		*ft_vecpop_elems(t_vector *vec, size_t num_elems);
