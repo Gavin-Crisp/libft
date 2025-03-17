@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pop.c                                           :+:      :+:    :+:   */
+/*   ft_push_consume.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 10:31:04 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 12:09:20 by gcrisp           ###   ########.fr       */
+/*   Created: 2025/03/17 11:56:19 by gcrisp            #+#    #+#             */
+/*   Updated: 2025/03/17 12:04:52 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_vecpop(t_vector *vec)
+int	ft_vecpush_consume(t_vector *vec, void *elem)
 {
-	void	*elem;
+	int	res;
 
-	if (vec->length == 0)
-		return (0);
-	elem = malloc(vec->_elem_size);
-	ft_memcpy(elem, ft_vecindex(vec, vec->length - 1), vec->_elem_size);
-	vec->length--;
-	return (elem);
+	res = ft_vecpush(vec, elem);
+	free(elem);
+	return (res);
 }

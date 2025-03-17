@@ -51,9 +51,7 @@ fclean:
 	if [ -f $(NAME) ]; then rm $(NAME) && $(call print,REMOVED $(NAME)); fi
 	$(call print,Done)
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
 
 norm: ; norminette | grep -v OK || echo "All good"
 
