@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/17 11:55:41 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:05:15 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ int			ft_vec_push_elems(t_vector *vec, void *elems, size_t num_elems);
 int			ft_vecpush(t_vector *vec, void *elem);
 void		*ft_vecremove_elems(t_vector *vec, size_t index, size_t num_elems);
 void		*ft_vecremove(t_vector *vec, size_t index);
+void		ft_vecreserve_exact(t_vector *vec, size_t num_elems);
 void		ft_vecreserve(t_vector *vec, size_t num_elems);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:31:02 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/03 10:31:03 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:05:35 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ t_vector	*ft_vecnew_with_capacity(size_t capacity, size_t elem_size)
 {
 	t_vector	*out;
 
-	out = ft_vecnew(elem_size);
-	ft_vecreserve(out, capacity);
+	out = malloc(sizeof(t_vector));
+	out->_elem_size = elem_size;
+	out->length = 0;
+	out->_capacity = capacity;
+	out->data = ft_malloc(out->_capacity * out->_elem_size);
 	return (out);
 }
