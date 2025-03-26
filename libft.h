@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/24 16:08:46 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/03/26 12:20:22 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_vector
 	size_t	_elem_size;
 }	t_vector;
 
+void		ft_vecclear(t_vector *vec, void (*clear)(void *));
 int			ft_vecdelete(t_vector *vec, size_t index, void (*clear)(void *));
 void		ft_vecfor_each(t_vector *vec, void (*action)(void *, size_t));
 void		ft_vecfree(t_vector **pvec, void (*clear)(void *));
