@@ -6,7 +6,7 @@
 /*   By: gcrisp <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:22:43 by gcrisp            #+#    #+#             */
-/*   Updated: 2025/03/26 12:20:22 by gcrisp           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:35:06 by gcrisp           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void		*ft_memset(void *b, int c, size_t len);
 void		ft_memswap(void *a, void *b, size_t n);
 
 // string
+void		ft_free_strs(char **strs);
 char		**ft_split_by(char const *s, int (*p)(int c));
 char		**ft_split(char const *s, char c);
 char		*ft_strchr(const char *s, int c);
